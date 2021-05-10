@@ -1,6 +1,6 @@
 // import { Button } from "@material-ui/core";
 import React, { useState } from "react";
-import { storage, db } from "../config/Config";
+import { storage, db } from "../config/Config.js";
 
 export const AddProducts = () => {
   const [name, setName] = useState("");
@@ -29,12 +29,11 @@ export const AddProducts = () => {
     uploadTask.on(
       "state_change",
       (snapshot) => {
-        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        const progress =
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
         console.log(progress);
       },
-      (err) => {
-        setError(err.message);
-      },
+      (err) => setError(err.message),
       () => {
         storage
           .ref("images")
