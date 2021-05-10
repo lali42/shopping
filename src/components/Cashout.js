@@ -3,8 +3,18 @@ import { Navbar } from "./Navbar";
 import { CartContext } from "../global/CartContext";
 import { db } from "../config/Config";
 import { useHistory } from "react-router-dom";
+import Lottie from "react-lottie";
+import Delivery from "../lotties/16803-delivery.json";
 
 export const Cashout = () => {
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: Delivery,
+    rendererSettings: {
+      preserveAspectRatio: "xMidYMid slice",
+    },
+  };
   const { totalPrice, totalQty, dispatch } = useContext(CartContext);
 
   const history = useHistory();
@@ -32,7 +42,6 @@ export const Cashout = () => {
         setCell("");
         setName("");
         setAddress("");
-        dispatch({ type: "EMPTY" });
         setSuccessMsg(
           "Your order has been placed successfully. Thanks for visiting us. You will be redirected to home page after 8 seconds"
         );
@@ -48,6 +57,7 @@ export const Cashout = () => {
       <Navbar />
       <div className="container">
         <br />
+        <div><Lottie options={defaultOptions} height={400} width={400} /></div>
         <h2>Cashout Details</h2>
         <br />
         {successMsg && <div className="success-msg">{successMsg}</div>}
@@ -102,7 +112,11 @@ export const Cashout = () => {
             disabled
           />
           <br />
-          <button type="submit" className="btn btn-success btn-md mybtn">
+          <button
+            type="submit"
+            className="btn btn-success btn-md mybtn"
+            onClick={() => dispatch({ type: "EMPTY" })}
+          >
             SUBMIT
           </button>
         </form>

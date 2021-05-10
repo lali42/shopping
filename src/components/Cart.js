@@ -6,13 +6,23 @@ import AddIcon from "@material-ui/icons/Add";
 import RemoveIcon from "@material-ui/icons/Remove";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { Button } from "@material-ui/core";
+import Lottie from "react-lottie";
+import Error from "../lotties/shopping-bag-error.json";
 
 export const Cart = () => {
-  const data = useContext(CartContext);
+  // const data = useContext(CartContext);
   // console.log(data);
   const { shoppingCart, dispatch, totalPrice, totalQty } = useContext(
     CartContext
   );
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: Error,
+    rendererSettings: {
+      preserveAspectRatio: "xMidYMid slice",
+    },
+  };
   return (
     <>
       <Navbar />
@@ -22,11 +32,10 @@ export const Cart = () => {
           {shoppingCart.length === 0 && (
             <div>
               <div>
+                <Lottie options={defaultOptions} height={600} width={600} />
                 no items in your cart or slow internet causing trouble (Refresh
-                the page) or you are not logged in
-              </div>
-              <div>
-                <Link to="/">Return to Home page</Link>
+                the page) or you are not logged in 
+                <Link to="/"> Return to Home page</Link>
               </div>
             </div>
           )}

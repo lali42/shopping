@@ -1,8 +1,10 @@
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 import { CartContext } from "../global/CartContext";
 import { ProductsContext } from "../global/ProductsContext";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
+import Lottie from "react-lottie";
+import Loader from "../lotties/36605-shopping-cart.json";
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -34,14 +36,26 @@ export const Products = () => {
   // console.log(products);
   // const data = useContext(CartContext);
   // console.log(data);
-  const { dispatch } = useContext(CartContext);
+  const { dispatch, totalQty } = useContext(CartContext);
+
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: Loader,
+    rendererSettings: {
+      preserveAspectRatio: "xMidYMid slice",
+    },
+  };
 
   return (
     <>
       {products.length !== 0 && <h1>Products</h1>}
       <div className="products-container">
         {products.length === 0 && (
-          <div>slow internet...no products to display</div>
+          // <div>slow internet...no products to display</div>
+          <div>
+            <Lottie options={defaultOptions} height={600} width={600} />
+          </div>
         )}
         {products.map((product) => (
           <div className="product-card" key={product.ID}>
@@ -63,6 +77,7 @@ export const Products = () => {
                   type: "add_to_cart",
                   id: product.ID,
                   product,
+                  totalQty,
                 });
               }}
             >
