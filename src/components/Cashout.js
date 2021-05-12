@@ -5,13 +5,11 @@ import { db } from "../config/Config";
 import { useHistory } from "react-router-dom";
 import Lottie from "react-lottie";
 import Delivery from "../lotties/delivery-boy.json";
-import Checkout from "../lotties/50482-cart-checkout.json";
 import TextField from "@material-ui/core/TextField";
 import { Button, Card, Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { Footer } from "./Footer";
 import { Link } from "react-router-dom";
-import Alert from "@material-ui/lab/Alert";
 
 const useStyles = makeStyles({
   root: {
@@ -33,8 +31,7 @@ export const Cashout = () => {
     },
   };
 
-  const { totalPrice, totalQty, dispatch, pricePromotion, rebate } =
-    useContext(CartContext);
+  const { totalPrice, totalQty, dispatch, rebate } = useContext(CartContext);
 
   const history = useHistory();
 
@@ -48,25 +45,26 @@ export const Cashout = () => {
     e.preventDefault();
     const date = new Date();
     const time = date.getTime();
+    const total = totalPrice - rebate
     db.collection("Buyer-info")
       .doc("_" + time)
       .set({
         BuyerName: name,
         BuyerCell: cell,
         BuyerAddress: address,
-        BuyerPayment: totalPrice - rebate,
+        BuyerPayment: total,
         BuyerQuantity: totalQty,
       })
       .then(() => {
         setCell("");
-        setName("");
         setAddress("");
+        dispatch({ type: "EMPTY" });
         setSuccessMsg(
-          "Your order has been placed successfully. Thanks for visiting us. You will be redirected to home page after 8 seconds"
+          "Your order has been placed successfully. Thanks for visiting us. You will be redirected to home page after 5 seconds"
         );
         setTimeout(() => {
           history.push("/");
-        }, 8000);
+        }, 5000);
       })
       .catch((err) => setError(err.message));
   };
@@ -79,7 +77,14 @@ export const Cashout = () => {
           <Lottie options={defaultOptions} height={300} width={300} />
         </div>
         <h1 className="center">Make an order</h1>
-        {successMsg && <div className="success-msg">{successMsg}</div>}
+        {successMsg && (
+          <div
+            className="success-msg"
+            style={{ color: "black", position: "fixed" }}
+          >
+            {successMsg}
+          </div>
+        )}
 
         <div className="center">
           <Card className="container">
