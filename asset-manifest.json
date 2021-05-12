@@ -1,28 +1,28 @@
 {
   "files": {
     "main.css": "/shopping/static/css/main.bfefe6ff.chunk.css",
-    "main.js": "/shopping/static/js/main.88b01995.chunk.js",
-    "main.js.map": "/shopping/static/js/main.88b01995.chunk.js.map",
-    "runtime-main.js": "/shopping/static/js/runtime-main.648309f1.js",
-    "runtime-main.js.map": "/shopping/static/js/runtime-main.648309f1.js.map",
+    "main.js": "/shopping/static/js/main.82b46619.chunk.js",
+    "main.js.map": "/shopping/static/js/main.82b46619.chunk.js.map",
+    "runtime-main.js": "/shopping/static/js/runtime-main.7faca58d.js",
+    "runtime-main.js.map": "/shopping/static/js/runtime-main.7faca58d.js.map",
     "static/css/2.b57b7cfd.chunk.css": "/shopping/static/css/2.b57b7cfd.chunk.css",
-    "static/js/2.828083f5.chunk.js": "/shopping/static/js/2.828083f5.chunk.js",
-    "static/js/2.828083f5.chunk.js.map": "/shopping/static/js/2.828083f5.chunk.js.map",
-    "static/js/3.6209a2da.chunk.js": "/shopping/static/js/3.6209a2da.chunk.js",
-    "static/js/3.6209a2da.chunk.js.map": "/shopping/static/js/3.6209a2da.chunk.js.map",
+    "static/js/2.bc27ff42.chunk.js": "/shopping/static/js/2.bc27ff42.chunk.js",
+    "static/js/2.bc27ff42.chunk.js.map": "/shopping/static/js/2.bc27ff42.chunk.js.map",
+    "static/js/3.9eb6fed8.chunk.js": "/shopping/static/js/3.9eb6fed8.chunk.js",
+    "static/js/3.9eb6fed8.chunk.js.map": "/shopping/static/js/3.9eb6fed8.chunk.js.map",
     "index.html": "/shopping/index.html",
     "static/css/2.b57b7cfd.chunk.css.map": "/shopping/static/css/2.b57b7cfd.chunk.css.map",
     "static/css/main.bfefe6ff.chunk.css.map": "/shopping/static/css/main.bfefe6ff.chunk.css.map",
-    "static/js/2.828083f5.chunk.js.LICENSE.txt": "/shopping/static/js/2.828083f5.chunk.js.LICENSE.txt",
+    "static/js/2.bc27ff42.chunk.js.LICENSE.txt": "/shopping/static/js/2.bc27ff42.chunk.js.LICENSE.txt",
     "static/media/1.29e9830f.jpg": "/shopping/static/media/1.29e9830f.jpg",
     "static/media/2.75870827.jpg": "/shopping/static/media/2.75870827.jpg",
     "static/media/3.247e5513.jpg": "/shopping/static/media/3.247e5513.jpg"
   },
   "entrypoints": [
-    "static/js/runtime-main.648309f1.js",
+    "static/js/runtime-main.7faca58d.js",
     "static/css/2.b57b7cfd.chunk.css",
-    "static/js/2.828083f5.chunk.js",
+    "static/js/2.bc27ff42.chunk.js",
     "static/css/main.bfefe6ff.chunk.css",
-    "static/js/main.88b01995.chunk.js"
+    "static/js/main.82b46619.chunk.js"
   ]
 }
