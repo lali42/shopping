@@ -8,6 +8,8 @@ export const CartContextProvider = (props) => {
     shoppingCart: [],
     totalPrice: 0,
     totalQty: 0,
+    pricePromotion:0,
+    qtyPromotion:0,
   });
   return (
     <CartContext.Provider value={{ ...cart, dispatch }}>

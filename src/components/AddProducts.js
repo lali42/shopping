@@ -1,6 +1,8 @@
 // import { Button } from "@material-ui/core";
+import { Card, TextField, Button } from "@material-ui/core";
 import React, { useState } from "react";
 import { storage, db } from "../config/Config.js";
+import { Link } from "react-router-dom";
 
 export const AddProducts = () => {
   const [name, setName] = useState("");
@@ -62,48 +64,108 @@ export const AddProducts = () => {
   };
 
   return (
-    <div className="container">
+    <div>
       <br />
-      <h2>ADD PRODUCTS</h2>
-      <hr />
-      <form autoComplete="off" className="form-group" onSubmit={addProduct}>
-        <label htmlFor="p-name">Name</label>
-        <input
-          type="text"
-          className="form-control"
-          required
-          onChange={(e) => setName(e.target.value)}
-          value={name}
-        />
-        <br />
-        <label htmlFor="p-desc">Description</label>
-        <input
-          type="text"
-          className="form-control"
-          required
-          onChange={(e) => setDesc(e.target.value)}
-          value={desc}
-        />
-        <br />
-        <label htmlFor="p-price">Price</label>
-        <input
-          type="number"
-          className="form-control"
-          required
-          onChange={(e) => setPrice(e.target.value)}
-          value={price}
-        />
-        <br />
-        <label htmlFor="p-img">Image</label>
-        <input
-          type="file"
-          className="form-control"
-          onChange={imgHandler}
-          id="file"
-        />
-        <br />
-        <button className="btn btn-success btn-md mybtn">ADD</button>
-      </form>
+      <h1 className="center-add">ADD PRODUCTS</h1>
+      <div className="center-add">
+        <Card className="container-add">
+          <form autoComplete="off" className="form-group" onSubmit={addProduct}>
+            <TextField
+              htmlFor="p-name"
+              type="text"
+              required
+              onChange={(e) => setName(e.target.value)}
+              value={name}
+              label="Name"
+              variant="outlined"
+              className="textField-add"
+            ></TextField>
+            {/* <label htmlFor="p-name">Name</label>
+            <input
+              type="text"
+              className="form-control"
+              required
+              onChange={(e) => setName(e.target.value)}
+              value={name}
+            />
+            <br /> */}
+            <TextField
+              htmlFor="p-desc"
+              type="text"
+              required
+              onChange={(e) => setDesc(e.target.value)}
+              value={desc}
+              label="Description"
+              variant="outlined"
+              className="textField-add"
+              style={{ marginTop: 30 }}
+            ></TextField>
+            {/* <label htmlFor="p-desc">Description</label>
+            <input
+              type="text"
+              className="form-control"
+              required
+              onChange={(e) => setDesc(e.target.value)}
+              value={desc}
+            />
+            <br /> */}
+            <TextField
+              htmlFor="p-price"
+              type="number"
+              required
+              onChange={(e) => setPrice(e.target.value)}
+              value={price}
+              label="Price"
+              variant="outlined"
+              className="textField-add"
+              style={{ marginTop: 30 }}
+            ></TextField>
+            {/* <label htmlFor="p-price">Price</label>
+            <input
+              type="number"
+              className="form-control"
+              required
+              onChange={(e) => setPrice(e.target.value)}
+              value={price}
+            />
+            <br /> */}
+            <br />
+            <label htmlFor="p-img" className="title-add">
+              Product Image :
+            </label>
+            <input
+              type="file"
+              onChange={imgHandler}
+              id="file"
+              style={{ marginTop: 20, marginBottom: 20 }}
+            />
+
+            <Button
+              type="submit"
+              fullWidth
+              style={{
+                color: "#fff",
+                backgroundColor: "#ea5455",
+              }}
+            >
+              add
+            </Button>
+            <Link to="/">
+              <Button
+                fullWidth
+                style={{
+                  marginTop: 20 + "px",
+                  color: "#fff",
+                  backgroundColor: "#2d4059",
+                }}
+              >
+                Cancle
+              </Button>
+            </Link>
+          </form>
+        </Card>
+      </div>
+
       {error && <span>{error}</span>}
     </div>
   );

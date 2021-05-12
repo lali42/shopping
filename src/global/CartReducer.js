@@ -1,9 +1,10 @@
 export const CartReducer = (state, action) => {
-  const { shoppingCart, totalPrice, totalQty } = state;
+  const { shoppingCart, totalPrice, totalQty, pricePromotion } = state;
   let product;
   let index;
   let updatePrice;
   let updateQty;
+  let updatePricePromotion;
   switch (action.type) {
     case "add_to_cart":
       const check = shoppingCart.find((product) => product.ID === action.id);
@@ -16,10 +17,12 @@ export const CartReducer = (state, action) => {
         product["TotalPrice"] = product.price * product.qty;
         updateQty = totalQty + 1;
         updatePrice = totalPrice + product.price;
+        updatePricePromotion = updatePrice;
         return {
           shoppingCart: [product, ...shoppingCart],
           totalPrice: updatePrice,
           totalQty: updateQty,
+          pricePromotion: updatePricePromotion,
         };
       }
       break;
@@ -30,15 +33,35 @@ export const CartReducer = (state, action) => {
       product.TotalProductPrice = product.qty * product.price;
       updateQty = totalQty + 1;
       updatePrice = totalPrice + product.price;
+      updatePricePromotion = updatePrice + updatePricePromotion;
       index = shoppingCart.findIndex((cart) => cart.ProductID === action.id);
       shoppingCart[index] = product;
+      const test = shoppingCart[index].qty;
+      let priceBerfore = test * product.price;
+      // console.log("befroe", priceBerfore);
 
-      return {
-        shoppingCart: [...shoppingCart],
-        totalPrice: updatePrice,
-        totalQty: updateQty,
-      };
-
+      if (test % 4 === 0) {
+        console.log("test", test);
+        let unit = test / 4;
+        let priceAfter = unit * product.price;
+        // console.log("After", priceAfter);
+        let after = priceBerfore - priceAfter;
+        updatePricePromotion = after;
+        console.log("price", updatePricePromotion);
+        return {
+          shoppingCart: [...shoppingCart],
+          pricePromotion: updatePricePromotion,
+          totalPrice: updatePrice,
+          totalQty: updateQty,
+        };
+      } else {
+        return {
+          shoppingCart: [...shoppingCart],
+          totalPrice: updatePrice,
+          totalQty: updateQty,
+          pricePromotion: updatePrice,
+        };
+      }
       break;
 
     case "DEC":
@@ -48,13 +71,33 @@ export const CartReducer = (state, action) => {
         product.TotalProductPrice = product.qty * product.price;
         updatePrice = totalPrice - product.price;
         updateQty = totalQty - 1;
+        updatePricePromotion = updatePrice + updatePricePromotion;
         index = shoppingCart.findIndex((cart) => cart.ID === action.id);
         shoppingCart[index] = product;
-        return {
-          shoppingCart: [...shoppingCart],
-          totalPrice: updatePrice,
-          totalQty: updateQty,
-        };
+        const test = shoppingCart[index].qty;
+        let priceBerfore = test * product.price;
+        if (test % 4 === 0) {
+          console.log("test", test);
+          let unit = test / 4;
+          let priceAfter = unit * product.price;
+          // console.log("After", priceAfter);
+          let after = priceBerfore - priceAfter;
+          updatePricePromotion = after;
+          console.log("price", updatePricePromotion);
+          return {
+            shoppingCart: [...shoppingCart],
+            pricePromotion: updatePricePromotion,
+            totalPrice: updatePrice,
+            totalQty: updateQty,
+          };
+        } else {
+          return {
+            shoppingCart: [...shoppingCart],
+            totalPrice: updatePrice,
+            totalQty: updateQty,
+            pricePromotion: updatePrice,
+          };
+        }
       } else {
         return state;
       }

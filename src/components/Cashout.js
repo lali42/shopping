@@ -4,9 +4,24 @@ import { CartContext } from "../global/CartContext";
 import { db } from "../config/Config";
 import { useHistory } from "react-router-dom";
 import Lottie from "react-lottie";
-import Delivery from "../lotties/16803-delivery.json";
+import Delivery from "../lotties/delivery-boy.json";
+import TextField from "@material-ui/core/TextField";
+import { Button, Card, Grid } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+import { Footer } from "./Footer";
+import { Link } from "react-router-dom";
+
+const useStyles = makeStyles({
+  root: {
+    maxWidth: "50%",
+    background: "#686d76",
+    display: "flex",
+    justifyContent: "center",
+  },
+});
 
 export const Cashout = () => {
+  const classes = useStyles();
   const defaultOptions = {
     loop: true,
     autoplay: true,
@@ -55,72 +70,118 @@ export const Cashout = () => {
   return (
     <>
       <Navbar />
-      <div className="container">
-        <br />
-        <div><Lottie options={defaultOptions} height={400} width={400} /></div>
-        <h2>Cashout Details</h2>
-        <br />
+      <div>
+        <div>
+          <Lottie options={defaultOptions} height={300} width={300} />
+        </div>
+        <h1 className="center">Cashout Details</h1>
         {successMsg && <div className="success-msg">{successMsg}</div>}
-        <form
-          autoComplete="off"
-          className="form-group"
-          onSubmit={cashoutSubmit}
-        >
-          <label htmlFor="name">Name</label>
-          <input
-            type="text"
-            className="form-control"
-            onChange={(e) => setName(e.target.value)}
-            required
-            value={name}
-          />
-          <br />
-          <label htmlFor="Cell No">Cell No</label>
-          <input
-            type="number"
-            className="form-control"
-            required
-            onChange={(e) => setCell(e.target.value)}
-            value={cell}
-            placeholder="xxx-xxx-xxxx"
-          />
-          <br />
-          <label htmlFor="Delivery Address">Delivery Address</label>
-          <input
-            type="text"
-            className="form-control"
-            required
-            onChange={(e) => setAddress(e.target.value)}
-            value={address}
-          />
-          <br />
-          <label htmlFor="Price To Pay">Price To Pay</label>
-          <input
-            type="number"
-            className="form-control"
-            required
-            value={totalPrice}
-            disabled
-          />
-          <br />
-          <label htmlFor="Total No of Products">Total No of Products</label>
-          <input
-            type="number"
-            className="form-control"
-            required
-            value={totalQty}
-            disabled
-          />
-          <br />
-          <button
-            type="submit"
-            className="btn btn-success btn-md mybtn"
-            onClick={() => dispatch({ type: "EMPTY" })}
-          >
-            SUBMIT
-          </button>
-        </form>
-        {error && <span className="error-msg">{error}</span>}
+
+        <div className="center">
+          <Card className="container">
+            <form autoComplete="off" onSubmit={cashoutSubmit}>
+              <TextField
+                onChange={(e) => setName(e.target.value)}
+                required
+                value={name}
+                type="text"
+                htmlFor="name"
+                label="Name"
+                variant="outlined"
+                className="textField"
+                style={{ marginTop: 30 }}
+              />
+
+              <TextField
+                required
+                onChange={(e) => setCell(e.target.value)}
+                value={cell}
+                placeholder="xxx-xxx-xxxx"
+                type="number"
+                htmlFor="Cell No"
+                label="Phone Number"
+                className="textField"
+                variant="outlined"
+                style={{ marginTop: 30 }}
+              />
+
+              <TextField
+                type="text"
+                required
+                onChange={(e) => setAddress(e.target.value)}
+                value={address}
+                htmlFor="Delivery Address"
+                label="Address"
+                className="textField"
+                variant="outlined"
+                placeholder="Placeholder"
+                multiline
+                style={{ marginTop: 30 }}
+              />
+
+              <Grid>
+                <Grid item xs></Grid>
+              </Grid>
+
+              <TextField
+                type="number"
+                required
+                value={totalPrice}
+                disabled
+                htmlFor="Price To Pay"
+                label="Price To Pay"
+                className="textField"
+                variant="outlined"
+                style={{ marginTop: 30 }}
+              />
+
+              <TextField
+                type="number"
+                required
+                value={totalQty}
+                disabled
+                htmlFor="Total No of Products"
+                label="Total No of Products"
+                className="textField"
+                variant="outlined"
+                style={{ marginTop: 30 }}
+              />
+
+              <Button
+                fullWidth
+                type="submit"
+                className="btn-comfirm"
+                style={{
+                  marginTop: 15 + "px",
+                  color: "#fff",
+                  backgroundColor: "#ea5455",
+                  height: 45 + "px",
+                }}
+                onClick={() => dispatch({ type: "EMPTY" })}
+              >
+                confirm
+              </Button>
+              <Link to="/" className="cashout-link">
+                <Button
+                  fullWidth
+                  style={{
+                    marginTop: 15 + "px",
+                    marginBottom: 15 + "px",
+                    color: "#fff",
+                    backgroundColor: "#2d4059",
+                  }}
+                >
+                  Cancle
+                </Button>
+              </Link>
+            </form>
+
+            {error && <span className="error-msg">{error}</span>}
+          </Card>
+        </div>
+        <footer>
+          <Footer />
+        </footer>
       </div>
     </>
   );
