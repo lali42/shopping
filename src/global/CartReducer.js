@@ -82,14 +82,14 @@ export const CartReducer = (state, action) => {
         shoppingCart[index] = product;
         const test = shoppingCart[index].qty;
         let priceBerfore = test * product.price;
-        if (test % 4 !== 0) {
+        if (test % 4 === 0) {
           console.log("test", test);
-          let unit = 1;
+          let unit = test / 4;
           let pAfter = unit * product.price;
           console.log("After", pAfter);
           let after = priceBerfore - pAfter;
           updatePricePromotion = after;
-          updateRebate = rebate-pAfter;
+          updateRebate = rebate + pAfter;
           console.log("price", updatePricePromotion);
           return {
             shoppingCart: [...shoppingCart],
@@ -129,6 +129,8 @@ export const CartReducer = (state, action) => {
         shoppingCart: [],
         totalPrice: 0,
         totalQty: 0,
+        pricePromotion: 0,
+        rebate: 0,
       };
       break;
 

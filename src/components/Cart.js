@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
 export const Cart = () => {
   // const data = useContext(CartContext);
   // console.log(data);
-  const { shoppingCart, dispatch, totalPrice, totalQty, pricePromotion,rebate } =
+  const { shoppingCart, dispatch, totalPrice, totalQty, rebate,total } =
     useContext(CartContext);
   const defaultOptions = {
     loop: true,
@@ -128,7 +128,7 @@ export const Cart = () => {
                   </div>
                   <div className="cart-summary-price">
                     <span>Total Price</span>
-                    <span>{pricePromotion}</span>
+                    <span>{totalPrice-rebate}</span>
                   </div>
                   <Grid>
                     <Grid item xs className="cart-padding">

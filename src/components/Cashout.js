@@ -33,7 +33,7 @@ export const Cashout = () => {
     },
   };
 
-  const { totalPrice, totalQty, dispatch, pricePromotion,rebate } =
+  const { totalPrice, totalQty, dispatch, pricePromotion, rebate } =
     useContext(CartContext);
 
   const history = useHistory();
@@ -54,7 +54,7 @@ export const Cashout = () => {
         BuyerName: name,
         BuyerCell: cell,
         BuyerAddress: address,
-        BuyerPayment: pricePromotion,
+        BuyerPayment: totalPrice - rebate,
         BuyerQuantity: totalQty,
       })
       .then(() => {
@@ -78,7 +78,7 @@ export const Cashout = () => {
         <div style={{ marginTop: 100 + "px" }}>
           <Lottie options={defaultOptions} height={300} width={300} />
         </div>
-        <h1 className="center">Cashout Details</h1>
+        <h1 className="center">Make an order</h1>
         {successMsg && <div className="success-msg">{successMsg}</div>}
 
         <div className="center">
@@ -133,7 +133,7 @@ export const Cashout = () => {
               <TextField
                 type="number"
                 required
-                value={pricePromotion}
+                value={totalPrice - rebate}
                 disabled
                 htmlFor="Price To Pay"
                 label="Price To Pay"
@@ -154,7 +154,10 @@ export const Cashout = () => {
                 style={{ marginTop: 30 }}
               />
 
-              <h4 style={{ marginTop: 30,color:"black" }}>Redate : {rebate} </h4>
+              <h4 style={{ marginTop: 30, color: "black" }}>
+                Redate : {rebate}
+              </h4>
+              <h4 style={{ color: "black" }}>VAT : 0.00%</h4>
 
               <Button
                 fullWidth
