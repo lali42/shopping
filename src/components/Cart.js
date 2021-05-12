@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
 export const Cart = () => {
   // const data = useContext(CartContext);
   // console.log(data);
-  const { shoppingCart, dispatch, totalPrice, totalQty, rebate,total } =
+  const { shoppingCart, dispatch, totalPrice, totalQty, rebate } =
     useContext(CartContext);
   const defaultOptions = {
     loop: true,
@@ -102,7 +102,7 @@ export const Cart = () => {
                     <button
                       className="delete-btn"
                       onClick={() =>
-                        dispatch({ type: "DELETE", id: cart.ID, cart })
+                        dispatch({ type: "DELETE", id: cart.ID, cart,rebate })
                       }
                     >
                       <DeleteIcon size={50} />

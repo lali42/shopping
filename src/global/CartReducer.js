@@ -39,7 +39,7 @@ export const CartReducer = (state, action) => {
       updatePricePromotion = updatePrice + updatePricePromotion;
       index = shoppingCart.findIndex((cart) => cart.ProductID === action.id);
       shoppingCart[index] = product;
-      const test = shoppingCart[index].qty;
+      let test = shoppingCart[index].qty;
       let priceBerfore = test * product.price;
       // console.log("befroe", priceBerfore);
 
@@ -80,17 +80,17 @@ export const CartReducer = (state, action) => {
         updatePricePromotion = updatePrice + updatePricePromotion;
         index = shoppingCart.findIndex((cart) => cart.ID === action.id);
         shoppingCart[index] = product;
-        const test = shoppingCart[index].qty;
-        let priceBerfore = test * product.price;
-        if (test % 4 === 0) {
-          console.log("test", test);
-          let unit = test / 4;
+        let testD = shoppingCart[index].qty;
+        console.log("1:", testD);
+        console.log("rebate:", rebate);
+        let priceBerfore = testD * product.price;
+        if (testD % 4 !== 0) {
+          let unit = testD / 4;
           let pAfter = unit * product.price;
-          console.log("After", pAfter);
           let after = priceBerfore - pAfter;
           updatePricePromotion = after;
-          updateRebate = rebate + pAfter;
-          console.log("price", updatePricePromotion);
+          updateRebate = rebate - product.price;
+          console.log("up", updateRebate);
           return {
             shoppingCart: [...shoppingCart],
             pricePromotion: updatePricePromotion,
@@ -119,10 +119,13 @@ export const CartReducer = (state, action) => {
       product = action.cart;
       updateQty = totalQty - product.qty;
       updatePrice = totalPrice - product.qty * product.price;
+      updateRebate = rebate - rebate;
+      console.log(rebate);
       return {
         shoppingCart: [...filtered],
         totalPrice: updatePrice,
         totalQty: updateQty,
+        rebate: updateRebate,
       };
     case "EMPTY":
       return {
