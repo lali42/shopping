@@ -14,6 +14,11 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import { Footer } from "./Footer";
 import { Grid } from "@material-ui/core";
+import "react-slideshow-image/dist/styles.css";
+import { Slide } from "react-slideshow-image";
+import P1 from "../images/1.jpg";
+import P2 from "../images/2.jpg";
+import P3 from "../images/3.jpg";
 
 const useStyles = makeStyles({
   rootGrid: {
@@ -78,7 +83,26 @@ export const Products = () => {
 
   return (
     <>
-      {products.length !== 0 && <h1>Games Store</h1>}
+      {products.length !== 0 && (
+        <div>
+          <div className="center">
+            <Card className="card-slide">
+              <Slide easing="ease">
+                <div className="each-slide">
+                  <div style={{ backgroundImage: `url(${P1})` }}></div>
+                </div>
+                <div className="each-slide">
+                  <div style={{ backgroundImage: `url(${P2})` }}></div>
+                </div>
+                <div className="each-slide">
+                  <div style={{ backgroundImage: `url(${P3})` }}></div>
+                </div>
+              </Slide>
+            </Card>
+          </div>
+          <h1 style={{ marginLeft: 100 + "px" }}>Games Store</h1>
+        </div>
+      )}
       <div>
         {products.length === 0 && (
           <div>
@@ -90,7 +114,7 @@ export const Products = () => {
             {products.map((product) => (
               <div key={product.ID}>
                 <Grid item xs={6} sm={3}>
-                  <div style={{ paddingRight: 45 }}>
+                  <div style={{ padding: 30 + "px" }}>
                     <Card className={classes.rootCard}>
                       <CardMedia
                         component="img"
@@ -124,7 +148,7 @@ export const Products = () => {
                               align="right"
                               style={{ color: "#f05454" }}
                             >
-                              {product.price} Bath
+                              THB {product.price}
                             </Typography>
                           </Grid>
                         </Grid>
@@ -136,8 +160,8 @@ export const Products = () => {
                           fullWidth
                           onClick={() => {
                             handleClick({
-                              vertical: "top",
-                              horizontal: "center",
+                              vertical: "bottom",
+                              horizontal: "left",
                             });
                             dispatch({
                               type: "add_to_cart",
@@ -158,10 +182,12 @@ export const Products = () => {
                   open={open}
                   autoHideDuration={1000}
                   onClose={handleClose}
+                  message="This product add your cart"
+                  className="snack"
                 >
-                  <Alert onClose={handleClose} severity="success">
+                  {/* <Alert onClose={handleClose} severity="success">
                     This product add your cart
-                  </Alert>
+                  </Alert> */}
                 </Snackbar>
               </div>
             ))}

@@ -1,6 +1,7 @@
 {
   "name": "shopping",
   "version": "0.1.0",
+  "homepage": "https://lali42.github.io/shopping/",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.11.4",
@@ -11,14 +12,18 @@
     "@testing-library/user-event": "^12.1.10",
     "firebase": "^8.5.0",
     "get-google-fonts": "^1.2.2",
+    "gh-pages": "^3.1.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-lottie": "^1.2.3",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
+    "react-slideshow-image": "^3.4.6",
     "web-vitals": "^1.0.1"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

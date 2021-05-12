@@ -5,11 +5,13 @@ import { db } from "../config/Config";
 import { useHistory } from "react-router-dom";
 import Lottie from "react-lottie";
 import Delivery from "../lotties/delivery-boy.json";
+import Checkout from "../lotties/50482-cart-checkout.json";
 import TextField from "@material-ui/core/TextField";
 import { Button, Card, Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { Footer } from "./Footer";
 import { Link } from "react-router-dom";
+import Alert from "@material-ui/lab/Alert";
 
 const useStyles = makeStyles({
   root: {
@@ -30,7 +32,9 @@ export const Cashout = () => {
       preserveAspectRatio: "xMidYMid slice",
     },
   };
-  const { totalPrice, totalQty, dispatch } = useContext(CartContext);
+
+  const { totalPrice, totalQty, dispatch, pricePromotion,rebate } =
+    useContext(CartContext);
 
   const history = useHistory();
 
@@ -50,7 +54,7 @@ export const Cashout = () => {
         BuyerName: name,
         BuyerCell: cell,
         BuyerAddress: address,
-        BuyerPayment: totalPrice,
+        BuyerPayment: pricePromotion,
         BuyerQuantity: totalQty,
       })
       .then(() => {
@@ -71,7 +75,7 @@ export const Cashout = () => {
     <>
       <Navbar />
       <div>
-        <div>
+        <div style={{ marginTop: 100 + "px" }}>
           <Lottie options={defaultOptions} height={300} width={300} />
         </div>
         <h1 className="center">Cashout Details</h1>
@@ -80,6 +84,7 @@ export const Cashout = () => {
         <div className="center">
           <Card className="container">
             <form autoComplete="off" onSubmit={cashoutSubmit}>
+              <h2 style={{ marginTop: 30 + "px" }}>Delivery details</h2>
               <TextField
                 onChange={(e) => setName(e.target.value)}
                 required
@@ -89,7 +94,7 @@ export const Cashout = () => {
                 label="Name"
                 variant="outlined"
                 className="textField"
-                style={{ marginTop: 30 }}
+                style={{ marginTop: 5 + "px" }}
               />
 
               <TextField
@@ -123,16 +128,18 @@ export const Cashout = () => {
                 <Grid item xs></Grid>
               </Grid>
 
+              <h2 style={{ marginTop: 30 + "px" }}>Amount to be pay</h2>
+
               <TextField
                 type="number"
                 required
-                value={totalPrice}
+                value={pricePromotion}
                 disabled
                 htmlFor="Price To Pay"
                 label="Price To Pay"
                 className="textField"
                 variant="outlined"
-                style={{ marginTop: 30 }}
+                style={{ marginTop: 5 + "px" }}
               />
 
               <TextField
@@ -146,6 +153,8 @@ export const Cashout = () => {
                 variant="outlined"
                 style={{ marginTop: 30 }}
               />
+
+              <h4 style={{ marginTop: 30,color:"black" }}>Redate : {rebate} </h4>
 
               <Button
                 fullWidth
@@ -161,7 +170,7 @@ export const Cashout = () => {
               >
                 confirm
               </Button>
-              <Link to="/" className="cashout-link">
+              <Link to="/cartproducts" className="cashout-link">
                 <Button
                   fullWidth
                   style={{
@@ -171,7 +180,7 @@ export const Cashout = () => {
                     backgroundColor: "#2d4059",
                   }}
                 >
-                  Cancle
+                  back
                 </Button>
               </Link>
             </form>

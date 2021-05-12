@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
 export const Cart = () => {
   // const data = useContext(CartContext);
   // console.log(data);
-  const { shoppingCart, dispatch, totalPrice, totalQty, pricePromotion } =
+  const { shoppingCart, dispatch, totalPrice, totalQty, pricePromotion,rebate } =
     useContext(CartContext);
   const defaultOptions = {
     loop: true,
@@ -36,12 +36,19 @@ export const Cart = () => {
     <>
       <Navbar />
       <>
-        {shoppingCart.length !== 0 && <h1>Cart</h1>}
+        {shoppingCart.length !== 0 && (
+          <h1 style={{ marginTop: 60 + "px" }}>All orders</h1>
+        )}
         <div className="cart-container">
           {shoppingCart.length === 0 && (
             <div>
               <div>
-                <Lottie options={defaultOptions} height={600} width={600} />
+                <Lottie
+                  options={defaultOptions}
+                  height={600}
+                  width={600}
+                  style={{ marginTop: 120 + "px" }}
+                />
                 <p>
                   no items in your cart or slow internet causing trouble
                   (Refresh the page) or you are not logged in
@@ -70,7 +77,7 @@ export const Cart = () => {
 
                     <div className="cart-name">{cart.name}</div>
 
-                    <div className="cart-price-orignal">{cart.price} Bath</div>
+                    <div className="cart-price-orignal">THB {cart.price}</div>
 
                     <div
                       className="inc"
@@ -106,7 +113,7 @@ export const Cart = () => {
             <Grid item xs={3}>
               {shoppingCart.length > 0 && (
                 <div className="cart-summary">
-                  <div className="cart-summary-heading">Cart-Summary</div>
+                  <div className="cart-summary-heading">Total payment</div>
                   <div className="cart-summary-price">
                     <span>Price</span>
                     <span>{totalPrice}</span>
@@ -116,7 +123,11 @@ export const Cart = () => {
                     <span>{totalQty}</span>
                   </div>
                   <div className="cart-summary-price">
-                    <span>Price for Promotion</span>
+                    <span>Rebate</span>
+                    <span>{rebate}</span>
+                  </div>
+                  <div className="cart-summary-price">
+                    <span>Total Price</span>
                     <span>{pricePromotion}</span>
                   </div>
                   <Grid>

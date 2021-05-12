@@ -15,9 +15,10 @@ export class App extends Component {
           <BrowserRouter>
             <Switch>
               <Route exact path="/" component={Home} />
+              <Route exact path="/shopping" component={Home} />
               <Route path="/addproducts" component={AddProducts} />
               <Route path="/cartproducts" component={() => <Cart />} />
-              <Route path="/cashout" component={()=> <Cashout/>}/>
+              <Route path="/cashout" component={() => <Cashout />} />
             </Switch>
           </BrowserRouter>
         </CartContextProvider>
