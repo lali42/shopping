@@ -68,7 +68,7 @@ export const Products = () => {
   // console.log(products);
   // const data = useContext(CartContext);
   // console.log(data);
-  const { dispatch, totalQty } = useContext(CartContext);
+  const { dispatch, totalQty,rebate } = useContext(CartContext);
 
   const defaultOptions = {
     loop: true,
@@ -168,6 +168,7 @@ export const Products = () => {
                               id: product.ID,
                               product,
                               totalQty,
+                              rebate
                             });
                           }}
                         >

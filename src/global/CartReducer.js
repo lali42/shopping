@@ -1,5 +1,5 @@
 export const CartReducer = (state, action) => {
-  const { shoppingCart, totalPrice, totalQty, pricePromotion, rebate } = state;
+  const { shoppingCart, totalPrice, totalQty, rebate } = state;
   let product;
   let index;
   let updatePrice;
@@ -50,7 +50,7 @@ export const CartReducer = (state, action) => {
         console.log("After", pAfter);
         let after = priceBerfore - pAfter;
         updatePricePromotion = after;
-        updateRebate = rebate + pAfter;
+        updateRebate = rebate + product.price;
         console.log("price", updatePricePromotion);
         return {
           shoppingCart: [...shoppingCart],
@@ -89,15 +89,27 @@ export const CartReducer = (state, action) => {
           let pAfter = unit * product.price;
           let after = priceBerfore - pAfter;
           updatePricePromotion = after;
-          updateRebate = rebate - product.price;
-          console.log("up", updateRebate);
-          return {
-            shoppingCart: [...shoppingCart],
-            pricePromotion: updatePricePromotion,
-            totalPrice: updatePrice,
-            totalQty: updateQty,
-            rebate: updateRebate,
-          };
+          let mod = testD % 4;
+          console.log("mod", mod);
+          if (mod === 3) {
+            updateRebate = rebate - product.price;
+            console.log("up", updateRebate);
+            return {
+              shoppingCart: [...shoppingCart],
+              pricePromotion: updatePricePromotion,
+              totalPrice: updatePrice,
+              totalQty: updateQty,
+              rebate: updateRebate,
+            };
+          } else {
+            return {
+              shoppingCart: [...shoppingCart],
+              totalPrice: updatePrice,
+              totalQty: updateQty,
+              pricePromotion: updatePrice,
+              rebate: rebate,
+            };
+          }
         } else {
           return {
             shoppingCart: [...shoppingCart],
@@ -117,6 +129,7 @@ export const CartReducer = (state, action) => {
         (product) => product.ID !== action.id
       );
       product = action.cart;
+      console.log("Product",product);
       updateQty = totalQty - product.qty;
       updatePrice = totalPrice - product.qty * product.price;
       updateRebate = rebate - rebate;

@@ -82,7 +82,7 @@ export const Cart = () => {
                     <div
                       className="inc"
                       onClick={() =>
-                        dispatch({ type: "INC", id: cart.ID, cart })
+                        dispatch({ type: "INC", id: cart.ID, cart,rebate })
                       }
                     >
                       <AddIcon size={50} />
@@ -93,7 +93,7 @@ export const Cart = () => {
                     <div
                       className="dec"
                       onClick={() =>
-                        dispatch({ type: "DEC", id: cart.ID, cart })
+                        dispatch({ type: "DEC", id: cart.ID, cart,rebate })
                       }
                     >
                       <RemoveIcon size={50} />
